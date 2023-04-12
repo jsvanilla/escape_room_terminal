@@ -63,3 +63,4 @@ if [ -d "$folder_name" ]; then
 else
     echo "${RED}The ${folder_name} does not exist. You need to create the folder."
 fi
+

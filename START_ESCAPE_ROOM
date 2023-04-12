@@ -24,14 +24,16 @@ ${BOLD}STEP2${NC}
 Create two empty files called GuessList.txt & First_Key.txt inside Room2 folder
 
 ${BOLD}STEP3${NC}
-Get into the Room1 folder and run: ${BOLD}bash OPEN_SECOND_ROOM.sh ${NC}
+Get into the Room1 folder and run: ${BOLD} bash OPEN_SECOND_ROOM ${NC}
 
 
 "
 
-if [ -d ".room1" ]; then
-    mv .room1 room1 &&
-    chmod 777 room1 &&
+if [ ! -d "room1" ]; then
+    mkdir room1 &&
+    cp -r ./.game_sources-dont_open/.mc/.hammer . &&
+    mv room1/.hammer room1/OPEN_SECOND_ROOM &&
+    # chmod 777 room1 &&
     echo -e "$welcome_title"
 else 
     echo -e "$welcome_title"

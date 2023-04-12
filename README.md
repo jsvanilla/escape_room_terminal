@@ -23,7 +23,7 @@ START WITH THE NEXT COMMAND IN THE scape_room_terminal FOLDER:
 
 
 ```bash
-bash  START_ESCAPE_ROOM.sh
+bash  START_ESCAPE_ROOM
 ```
 
 <br>
