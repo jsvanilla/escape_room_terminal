@@ -9,7 +9,7 @@ Escape room game for practice Linux Terminal &amp; Bash
 </h1>
 
 <h4 align=center>
-Open your terminal and pullish you command skills solving this game
+Open your terminal and polish you command skills solving this game
 </h4>
 <br>
 <h4 align=center>
