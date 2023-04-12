@@ -18,7 +18,7 @@ welcome_title="----------------------------------------
 ${BOLD}${BLUE}${uppercase_text}${NC}
 
 ${BOLD}STEP1${NC}
-Create a folder at the same level as Room1 and call it Room2
+Create a folder at the same level as room1 and call it room2
 
 ${BOLD}STEP2${NC}
 Create two empty files called GuessList.txt & First_Key.txt inside Room2 folder
@@ -29,4 +29,11 @@ Get into the Room1 folder and run: ${BOLD}bash OPEN_SECOND_ROOM.sh ${NC}
 
 "
 
-echo -e "$welcome_title"
+if [ -d ".room1" ]; then
+    mv .room1 room1 &&
+    chmod 777 room1 &&
+    echo -e "$welcome_title"
+else 
+    echo -e "$welcome_title"
+fi
+
