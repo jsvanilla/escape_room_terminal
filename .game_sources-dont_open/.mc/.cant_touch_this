@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Importar la variable desde el archivo .tantarara
+source .game_sources-dont_open/.tantarara
+
+# Verificar si existe el archivo master_key.txt y leer su contenido
+if [ -f master_key.txt ]; then
+    key=$(cat master_key.txt)
+else
+    key=""
+fi
+
+# Función para imprimir mensajes de error en colores
+print_error() {
+    echo -e "\033[31mMissing or Incorrect Key\033[0m"
+    echo -e "\033[34mJoin 2 of the 3 keys in the correct order in a file called master_key.txt and pass to the next room\033[0m"
+}
+
+# Comprobar si la clave es correcta
+if [ "$key" == "$MASTER_KEY" ]; then
+    # Crear la carpeta room3 y el archivo OPEN_CHEST.sh vacío
+    mkdir ../room3
+    touch ../room3/OPEN_CHEST.sh
+    echo "Folder room3 and file OPEN_CHEST.sh created successfully!"
+else
+    # Imprimir mensaje de error
+    print_error
+fi

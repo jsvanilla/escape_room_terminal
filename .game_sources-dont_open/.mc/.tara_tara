@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Definir el mensaje de error personalizado
+error_message="No se pudo iniciar el servidor debido a un problema de permisos o un problema externo al script."
+
+# Función para comprobar si un puerto está ocupado
+is_port_busy() {
+    netstat -tuln | grep -q ":$1"
+}
+
+# Función para instalar Python 3 si no está instalado
+install_python3() {
+    if ! command -v python3 &> /dev/null; then
+        echo "Python 3 no está instalado. Intentando instalarlo..."
+        if sudo apt-get update && sudo apt-get install -y python3; then
+            echo "Python 3 instalado correctamente."
+        else
+            echo "No se pudo instalar Python 3. Verifica tus permisos y vuelve a intentarlo."
+            exit 1
+        fi
+    fi
+}
+
+# Iniciar el servidor en un puerto disponible
+start_server() {
+    for ((port=4000; port<=4100; port++)); do
+        if ! is_port_busy $port; then
+            echo "Iniciando el servidor en el puerto $port..."
+            if python3 -c "import http.server, socketserver; \
+            class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler): \
+                def do_GET(self): \
+                    self.send_response(200); \
+                    self.send_header('Content-type', 'text/html; charset=utf-8'); \
+                    self.end_headers(); \
+                    with open('miTexto.txt', 'r') as f: \
+                        self.wfile.write(f.read().encode('utf-8')); \
+            handler = CustomHTTPRequestHandler; \
+            httpd = socketserver.TCPServer(('', $port), handler); \
+            httpd.serve_forever()"; then
+                exit 0
+            else
+                echo "$error_message"
+                exit 1
+            fi
+        fi
+    done
+    echo "No se encontró ningún puerto disponible en el rango 4000-4100."
+    exit 1
+}
+
+install_python3
+start_server
+
+
+# chest

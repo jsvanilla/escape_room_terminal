@@ -48,13 +48,17 @@ if [ -d "$folder_name" ]; then
     # Verifiies if the file exists
     if [ -f "${folder_name}/${guess_list_file}" ] && [ -f "${folder_name}/${first_key_file}" ]; then
         # Adds the content to the file
-        echo "$guess_list_content" > "${folder_name}/${guess_list_file}"
-        echo "$first_key_content" > "${folder_name}/${first_key_file}"
+        echo "$guess_list_content" > "${folder_name}/${guess_list_file}" &&
+        echo "$first_key_content" > "${folder_name}/${first_key_file}" &&
+        cp -r ./.game_sources-dont_open/.mc/.cant_touch_this . &&
+        mv room2/.cant_touch_this room2/OPEN_THIRD_ROOM &&
         echo "---------------------------------------- 
               ${GREEN}SUCCESS${NC}
         ---------------------------------------- 
         
         ${GREEN}${BOLD}room2 has been opened${NC}
+
+        ${BLUE}You can now go to room2 and run: ${BOLD}bash OPEN_THIRD_ROOM${NC}
         
         "
     else
